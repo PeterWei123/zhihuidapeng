@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../static/js/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../static/js/bootstrap.min.js"></script>
+<style>
+    .form-input {
+        width: 350px;
+        display: inline-block;
+    }
+    .title {
+        font-weight: bold;
+        font-size: 16px;
+        font-style: italic;
+    }
+</style>
+</head>
+<body style="padding: 12px; overflow: hidden">
+<div class="title">[<font color="red">重要</font>] <font color="red">请输入JavaServer/其他应用服务器 IP地址</font></div>
+    <div style="margin-top: 10px">
+        <input class="form-control form-input" id="javaip" value="{{ javaip }}"/>
+        <button class="btn btn-success" style="vertical-align: top;
+                margin-left: 5px" onclick="submitIP()">保存</button>
+    </div>
+    <div style="margin-top: 20px">
+        <span style="line-height: 34px">[<font color="red">可选</font>] 大棚是否根据光照强度自动补光：已</span>
+        <select class="form-control"
+                id="ledAuto" onchange="submitIP()"
+                style="width: 86px; display: inline-block">
+            <option {% if auto=='手动' %}selected{% endif %}>手动</option>
+            <option {% if auto=='自动' %}selected{% endif %}>自动</option>
+        </select>
+    </div>
+    <div style="margin-top: 15px">[自动时]弱光开灯有延迟，强光关灯延迟更多，这是合理的</div>
+    <div style="margin-top: 15px">
+        <span style="line-height: 34px">[本地大棚端口] 如果启动时端口不对 可以重置</span>
+        <input class="form-control"
+                id="myport" value="{{ myport }}"
+                style="width: 64px; display: inline-block"/>
+        <button class="btn btn-warning" style="vertical-align: top;
+                margin-left: 5px" onclick="submitIP()">保存</button>
+    </div>
+    <div style="margin-top: 15px">
+        <span style="line-height: 34px">[初始化mqtt时间]重启设备连接mqtt服务器时间</span>
+        <input class="form-control"
+                id="mqttTime" value="{{ mqttTime }}"
+                style="width: 59px; display: inline-block"/>
+        <button class="btn btn-warning" style="vertical-align: top;
+                margin-left: 5px" onclick="submitIP()">保存</button>
+    </div>
+    <script>
+        function submitIP() {
+            var javaip = document.getElementById('javaip').value
+            var myport = document.getElementById('myport').value
+            var mqttTime = document.getElementById('mqttTime').value
+            if (!javaip) {
+                alert('如果不填，将会把传感器数据传输到树莓派的测试地址')
+            } else {
+                alert('保存成功')
+            }
+            var ledAuto = document.getElementById('ledAuto').value
+            location.href = '/api/javaip?javaip=' + javaip +
+                '&auto=' + ledAuto + '&myport=' + myport +
+                '&mqttTime=' + mqttTime
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>首页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../static/assets/css/font-awesome.min.css" />
+<link rel="stylesheet" href="../static/assets/css/ace.min.css" />
+<link rel="stylesheet" href="../static/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="../static/assets/css/ace-skins.min.css" />
+<script src="../static/assets/js/ace-extra.min.js"></script>
+<script src="../static/assets/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small><i class="icon-home"></i> IOT设备上的web服务 </small>
+            </a>
+            <!-- /.brand -->
+        </div>
+        <!-- /.navbar-header -->
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo"
+                             src="../static/assets/avatars/user.png" alt="Jason's Photo" />
+                        <span class="user-info"> <small>欢迎光临,<br/>{{ username }}</small> </span>
+                        <i class="icon-caret-down"></i>
+                    </a>
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="../static/login.html"> <i class="icon-off"></i> 退出 </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.ace-nav -->
+        </div>
+        <!-- /.navbar-header -->
+    </div>
+    <!-- /.container -->
+</div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <div class="sidebar" id="sidebar">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'fixed')
+                } catch (e) {
+                }
+            </script>
+
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                    <button class="btn btn-success">
+                        <i class="icon-signal"></i>
+                    </button>
+                    <button class="btn btn-info">
+                        <i class="icon-pencil"></i>
+                    </button>
+                    <button class="btn btn-warning">
+                        <i class="icon-group"></i>
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="icon-cogs"></i>
+                    </button>
+                </div>
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <span class="btn btn-success"></span>
+                    <span class="btn btn-info"></span>
+                    <span class="btn btn-warning"></span>
+                    <span class="btn btn-danger"></span>
+                </div>
+            </div>
+            <!-- #sidebar-shortcuts -->
+
+            <ul class="nav nav-list">
+                <li class="active">
+                    <a href="../static/wifitpl.txt" target="mainframe">
+                        <i class="icon-dashboard"></i>
+                        <span class="menu-text"> 控制台 </span>
+                    </a>
+                </li>
+                <li class="active open">
+                    <a href="javascript:void(0)" target="mainframe" class="dropdown-toggle">
+                        <i class="icon-desktop"></i><span class="menu-text"> 系统管理 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul class="submenu" style="display: block">
+                        <li><a href="/sysmgr/appip" target="mainframe"> <i
+								class="icon-double-angle-right"></i> 应用服务器IP
+						</a></li>
+                        <li><a href="/sysmgr/dev" target="mainframe"> <i
+								class="icon-double-angle-right"></i> 设备开关情况
+						</a></li>
+                        <li><a href="/sysmgr/servo" target="mainframe"> <i
+								class="icon-double-angle-right"></i> 调整|舵机角度
+						</a></li>
+                        <li><a href="/sysmgr/mqtt" target="mainframe"> <i
+								class="icon-double-angle-right"></i> 设备mqtt信息
+						</a></li>
+                        <li><a href="/sysmgr/wifi" target="mainframe"> <i
+								class="icon-double-angle-right"></i> Wifi管理(没用)
+						</a></li>
+                        <li><a href="/sysmgr/apidoc" target="mainframe"> <i
+								class="icon-double-angle-right"></i> ApiDoc自己维护
+						</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.nav-list -->
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left"
+                   data-icon1="icon-double-angle-left"
+                     data-icon2="icon-double-angle-right"></i>
+            </div>
+
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'collapsed')
+                } catch (e) {
+                }
+            </script>
+        </div>
+
+        <div class="main-content" id="mains">
+            <iframe id="mainframe" name="mainframe" src="/sysmgr/appip"
+                style="width: 100%; vertical-align: top; border: 0;"></iframe>
+        </div>
+
+        <script type="text/javascript">
+            var height = $(window).height() - 45;
+            $("#mainframe").attr("height", height + "px;");
+            $(window).resize(function(){
+                height = $(window).height() - 45;
+                $("#mainframe").attr("height", height + "px;");
+            });
+            $(window).ready(function(){
+            	$('.submenu>li').on('click',function(){
+            		$(this).addClass('active');
+            		$(this).siblings().removeClass('active');
+            	});
+            });
+        </script>
+      <!-- /#ace-settings-container -->
+    </div>
+    <!-- /.main-container-inner -->
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+<!-- /.main-container -->
+<!-- basic scripts -->
+
+	<script type="text/javascript">
+		if ("ontouchend" in document)
+			document.write("<script src='../static/assets/js/jquery.mobile.custom.min.js'>"
+					+ "</"+"script>");
+	</script>
+	<script src="../static/assets/js/bootstrap.min.js"></script>
+	<script src="../static/assets/js/typeahead-bs2.min.js"></script>
+
+	<!-- page specific plugin scripts -->
+
+	<!--[if lte IE 8]>
+<script src="../static/assets/js/excanvas.min.js"></script>
+<![endif]-->
+
+	<script src="../static/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="../static/assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="../static/assets/js/jquery.slimscroll.min.js"></script>
+	<script src="../static/assets/js/jquery.easy-pie-chart.min.js"></script>
+	<script src="../static/assets/js/jquery.sparkline.min.js"></script>
+	<script src="../static/assets/js/flot/jquery.flot.min.js"></script>
+	<script src="../static/assets/js/flot/jquery.flot.pie.min.js"></script>
+	<script src="../static/assets/js/flot/jquery.flot.resize.min.js"></script>
+
+	<!-- ace scripts -->
+
+	<script src="../static/assets/js/ace-elements.min.js"></script>
+	<script src="../static/assets/js/ace.min.js"></script>
+</body>
+</html>

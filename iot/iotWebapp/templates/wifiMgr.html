@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../static/js/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../static/js/bootstrap.min.js"></script>
+<style>
+    .my-left {
+        float: left;
+        margin-right: 15px;
+    }
+    .my-right {
+        overflow: hidden;
+    }
+</style>
+<script>
+    function mySubmit() {
+        var nameList = document.getElementById('nameList')
+        var downFile = document.getElementById('downFile')
+        nameList = nameList.value
+        if (nameList) {
+            nameList = nameList.trim()
+            nameList = nameList.replaceAll('\n', ',')
+        } else {
+            alert('请完善信息！')
+            return
+        }
+        $.ajax({
+            url: '/sysmgr/downfile?nameList=' + nameList,
+            success() {
+                downFile.click()
+            }
+        })
+    }
+</script>
+</head>
+<body style="padding: 12px; overflow: hidden">
+    <textarea class="form-control my-left" id="nameList"
+              rows="22" style="width: 500px"
+              placeholder="此模块没什么用 请不要使用"></textarea>
+    <div class="my-right">
+        <button class="btn btn-success" onclick="mySubmit()">生成文件</button>
+        <a class="btn btn-danger"
+                style="margin-left: 100px; display: none"
+                download="wpa_supplicant.conf" id="downFile"
+                href="../static/wpa_supplicant.conf">下载文件</a>
+    </div>
+</body>
+</html>
